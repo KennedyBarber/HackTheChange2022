@@ -1,0 +1,932 @@
+#: import NoTransition kivy.uix.screenmanager.TransitionBase
+<Manager>:
+    id: screen_manager
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'oa2.png'
+
+    welc_screen: welc_screen   # main name, linked name
+    math_screen: math_screen
+    add1_screen: add1_screen
+    add2_screen: add2_screen
+    add3_screen: add3_screen
+    sub1_screen: sub1_screen
+    sub2_screen: sub2_screen
+    mul1_screen: mul1_screen
+    mul2_screen: mul2_screen
+    div1_screen: div1_screen
+    div2_screen: div2_screen
+
+    WelcScreen:
+        id: welc_screen
+        name:'welcome'
+        manager: screen_manager
+
+    MathScreen:
+        id: math_screen
+        name:'math'
+        manager: screen_manager
+
+    Add1Screen:
+        id: add1_screen
+        name:'add1'
+        manager: screen_manager
+
+    Add2Screen:
+        id: add2_screen
+        name:'add2'
+        manager: screen_manager
+
+    Add3Screen:
+        id: add3_screen
+        name:'add3'
+        manager: screen_manager
+
+    Sub1Screen:
+        id: sub1_screen
+        name:'sub1'
+        manager: screen_manager
+    
+    Sub2Screen:
+        id: sub2_screen
+        name:'sub2'
+        manager: screen_manager
+
+    Mul1Screen:
+        id: mul1_screen
+        name:'mul1'
+        manager: screen_manager
+
+    Mul2Screen:
+        id: mul2_screen
+        name:'mul2'
+        manager: screen_manager
+
+    Div1Screen:
+        id: div1_screen
+        name:'div1'
+        manager: screen_manager
+
+    Div2Screen:
+        id: div2_screen
+        name:'div2'
+        manager: screen_manager
+
+<WelcScreen>:
+    name: 'welcome'
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'oa1.png'
+    MDBoxLayout:
+        padding: '10dp'
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding:'10dp'
+            MDLabel: # refers to the message screen that is displayed to the user
+                id: name_label
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '35dp'
+                pos_hint: {"center_x": 0.5,"center_y":0.5}
+                text: "Name"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: "white"
+                bold: True
+            MDLabel: # blank space to move the upper bit higher
+                text:""
+                font_size: '40dp'
+        MDBoxLayout:
+            padding: '10dp'
+            orientation:'vertical'
+            MDTextField:
+                id: juicer
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '40dp'
+                color_mode: 'custom'
+                helper_text: "      To start fresh, enter your name!"
+                helper_text_mode: "persistent"
+                line_color_focus: 'black'
+                text_color_normal: 'black'
+                text_color_focus: 'black'
+                helper_text_color_normal: 'black'
+                size_hint: 0.5, None
+                pos_hint: {"center_x": 0.5,"center_y":0.5}
+            MDRectangleFlatIconButton:
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                text: "Start!"
+                theme_text_color: "Custom"
+                text_color: "white"
+                line_color: "green"
+                pos_hint: {"center_x": 0.5}
+                on_press: 
+                    app.get_name()
+                on_release: 
+                    root.manager.transition.duration = 1
+                    root.manager.current = 'math'
+            MDLabel:
+                text: ""
+                font_size: '40dp'
+
+<MathScreen>
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'oa2.png'
+    MDBoxLayout:
+        rows: 5
+        cols: 1
+        orientation: 'vertical'
+        spacing: "20dp"
+        padding: "40dp"
+        MDIcon:
+            icon: "pearls.png"
+        MDLabel:
+            id: pearls
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            size_hint: 0.5, 0.1
+            font_size: '60dp'
+            halign: 'left'
+            text: 'p'
+        MDLabel:
+            id: display_name
+            halign: "center"
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '120dp'
+            theme_text_color: "Custom"
+            text_color: "white"
+            font_size: '400dp'
+            size_hint: 1, 1
+            font_size: self.width/10
+            text: 'Select the type of math\n you would like to practice!'
+        
+        Button:
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            background_color: 0.1, 0.20, 0.8, 1
+            text: '( + ) Addition'
+            size_hint: 1, 1
+            font_size: '30dp'
+            on_press:
+                app.random_game('add')
+        Button:
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            background_color: 0.1, 0.20, 0.8, 1
+            text: '( - ) Subtraction'
+            size_hint: 1, 1
+            font_size: '30dp'
+            on_press:
+                app.random_game('sub')
+        Button:
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            background_color: 0.1, 0.20, 0.8, 1
+            text: '( * ) Multitplication'
+            size_hint: 1, 1
+            font_size: '30dp'
+            on_press:
+                app.random_game('mul')
+        Button:
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            background_color: 0.1, 0.20, 0.8, 1
+            text: '( / ) Division'
+            size_hint: 1, 1
+            font_size: '30dp'
+            on_press:
+                app.random_game('div')
+
+<Add1Screen@GridLayout>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'oa2.png'
+    BoxLayout:
+        orientation:'vertical'
+        MDLabel:
+            id: addatext
+            halign: "center"
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            theme_text_color: "Custom"
+            text_color: "blue"
+            text: 'Addition'
+            font_size: '80dp'
+            size_hint: 1, 0.4
+        MDGridLayout:
+            rows: 3
+            cols: 3
+            spacing: ('10dp', '10dp')
+            padding: ('20dp', '20dp', '20dp', '20dp')
+            Button:
+                id: adda1
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                font_size: self.width/5
+                text_color: "black"
+                on_press: app.check_answer('adda1')
+            Button:
+                id: adda2
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                font_size: self.width/5
+                text_color: 'black'
+                on_press: app.check_answer('adda2')
+            Button:
+                id: adda3
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                font_size: self.width/5
+                text_color: "black"
+                on_press: app.check_answer('adda3')
+            Button:
+                id: adda4
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                font_size: self.width/5
+                text_color: "black"
+                on_press: app.check_answer('adda4')
+            Button:
+                id: adda5
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                font_size: self.width/5
+                text_color: "black"
+                on_press: app.check_answer('adda5')
+            Button:
+                id: adda6
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                font_size: self.width/5
+                text_color: "black"
+                on_press: app.check_answer('adda6')
+            Button:
+                id: adda7
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                font_size: self.width/5
+                text_color: "black"
+                on_press: app.check_answer('adda7')
+            Button:
+                id: adda8
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                font_size: self.width/5
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer('adda8')
+            Button:
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                id: adda9
+                text: "A"
+                font_size: self.width/5
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer('adda9')
+    
+<Add2Screen@GridLayout>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'oa2.png'
+    BoxLayout:
+        cols: 2
+        rows: 4
+        orientation: 'vertical'
+        padding: "40dp"
+        MDLabel:
+            id: add_click_equation
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            text: 'Additon'
+            front_size: '80dp'
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: "blue"
+            font_size: self.width/10
+        MDLabel:
+            id: add_click_total
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            text: '0'
+            front_size: '80dp'
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: "blue"
+            font_size: self.width/10
+        BoxLayout:
+            Button:
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: '+'
+                size_hint: 1, 0.5
+                on_press: app.add_clicker(1)
+
+            Button:
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: '-'
+                size_hint: 1, 0.5
+                on_press: app.add_clicker(-1)
+        MDRectangleFlatButton:
+            id: add_click_enter
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            background_color: 0.1, 0.20, 0.8, 1
+            font_size: '150dp'
+            text: 'Enter'
+            theme_text_color: "Custom"
+            text_color: "blue"
+            size_hint: 1, 1
+            font_size: self.width/10
+            on_press: app.add_clicker_check()
+MDBoxLayout:
+    orientation: 'vertical'
+    MDScreen:
+        MDRectangleFlatButton:
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            text: 'Pearls Rewarded!'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            on_release: 
+                app.check_answer()
+                app.add_clicker_check()
+
+<Sub1Screen@GridLayout>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'oa2.png'
+    BoxLayout:
+        orientation:'vertical'
+        MDLabel:
+            id: subatext
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: "blue"
+            text: 'Addition'
+            font_size: '80dp'
+            size_hint: 1, 0.4
+            font_size: self.width/10
+        MDGridLayout:
+            rows: 3
+            cols: 3
+            spacing: ('10dp', '10dp')
+            padding: ('20dp', '20dp', '20dp', '20dp')
+            Button:
+                id: suba1
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_sub('suba1')
+            Button:
+                id: suba2
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: 'black'
+                on_press: app.check_answer_sub('suba2')
+            Button:
+                id: suba3
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_sub('suba3')
+            Button:
+                id: suba4
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_sub('suba4')
+            Button:
+                id: suba5
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_sub('suba5')
+            Button:
+                id: suba6
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_sub('suba6')
+            Button:
+                id: suba7
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_sub('suba7')
+            Button:
+                id: suba8
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_sub('suba8')
+            Button:
+                id: suba9
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_sub('suba9')
+                
+<Sub2Screen@GridLayout>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'oa2.png'
+    BoxLayout:
+        cols: 2
+        rows: 4
+        orientation: 'vertical'
+        padding: "40dp"
+        MDLabel:
+            id: sub_click_equation
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            text: 'Subtraction'
+            front_size: '80dp'
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: "blue"
+            font_size: self.width/10
+        MDLabel:
+            id: sub_click_total
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            text: '0'
+            front_size: '80dp'
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: "blue"
+            font_size: self.width/10
+        BoxLayout:
+            Button:
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: '-'
+                size_hint: 1, 0.5
+                on_press: app.sub_clicker(1)
+
+            Button:
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: '+'
+                size_hint: 1, 0.5
+                on_press: app.sub_clicker(-1)
+        MDRectangleFlatButton:
+            id: sub_click_enter
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            background_color: 0.1, 0.20, 0.8, 1
+            font_size: '150dp'
+            text: 'Enter'
+            theme_text_color: "Custom"
+            text_color: "blue"
+            size_hint: 1, 1
+            font_size: self.width/10
+            on_press: app.sub_clicker_check()
+
+<Div1Screen@GridLayout>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'oa2.png'
+    BoxLayout:
+        orientation:'vertical'
+        MDLabel:
+            id: divatext
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: "blue"
+            text: 'Division'
+            font_size: '80dp'
+            size_hint: 1, 0.4
+            font_size: self.width/10
+        MDGridLayout:
+            rows: 3
+            cols: 3
+            spacing: ('10dp', '10dp')
+            padding: ('20dp', '20dp', '20dp', '20dp')
+            Button:
+                id: diva1
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_div('diva1')
+            Button:
+                id: diva2
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: 'black'
+                on_press: app.check_answer_div('diva2')
+            Button:
+                id: diva3
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_div('diva3')
+            Button:
+                id: diva4
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                background_normal: 'salmon.png'
+                font_size: '80dp'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_div('diva4')
+            Button:
+                id: diva5
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_div('diva5')
+            Button:
+                id: diva6
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_div('diva6')
+            Button:
+                id: diva7
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_div('diva7')
+            Button:
+                id: diva8
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_div('diva8')
+            Button:
+                id: diva9
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_answer_div('diva9')
+                
+<Div2Screen@GridLayout>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'oa2.png'
+    BoxLayout:
+        cols: 2
+        rows: 4
+        orientation: 'vertical'
+        padding: "40dp"
+        MDLabel:
+            id: div_click_equation
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            text: 'Divison'
+            front_size: '80dp'
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: "blue"
+            font_size: self.width/10
+        MDLabel:
+            id: div_click_total
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            text: '0'
+            front_size: '80dp'
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: "blue"
+            font_size: self.width/10
+        BoxLayout:
+            Button:
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: '-'
+                size_hint: 1, 0.5
+                on_press: app.div_clicker(1)
+
+            Button:
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: '+'
+                theme_text_color: "Custom"
+                text_color: "blue"
+                size_hint: 1, 0.5
+                on_press: app.div_clicker(-1)
+        MDRectangleFlatButton:
+            id: div_click_enter
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '300dp'
+            background_color: 0.1, 0.20, 0.8, 1
+            text: 'Enter'
+            theme_text_color: "Custom"
+            text_color: "blue"
+            size_hint: 1, 1
+            font_size: self.width/10
+            on_press: app.div_clicker_check()
+        
+<Mul1Screen@GridLayout>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'oa2.png'
+    BoxLayout:
+        orientation:'vertical'
+        MDLabel:
+            id: mulatext
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            halign: "center"
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            theme_text_color: "Custom"
+            text_color: "blue"
+            text: 'Multiplication'
+            font_size: '80dp'
+            size_hint: 1, 0.4
+            font_size: self.width/10
+        MDGridLayout:
+            rows: 3
+            cols: 3
+            spacing: ('10dp', '10dp')
+            padding: ('20dp', '20dp', '20dp', '20dp')
+            Button:
+                id: mula1
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_mul('mula1')
+            Button:
+                id: mula2
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: 'black'
+                on_press: app.check_mul('mula2')
+            Button:
+                id: mula3
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_mul('mula3')
+            Button:
+                id: mula4
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_mul('mula4')
+            Button:
+                id: mula5
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_mul('mula5')
+            Button:
+                id: mula6
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_mul('mula6')
+            Button:
+                id: mula7
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                md_bg_color: 'red'
+                on_press: app.check_mul('mula7')
+            Button:
+                id: mula8
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_mul('mula8')
+            Button:
+                id: mula9
+                font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+                font_size: '80dp'
+                background_normal: 'salmon.png'
+                text: "A"
+                size_hint: '20dp', '20dp'
+                text_color: "black"
+                on_press: app.check_mul('mula9')
+
+<Mul2Screen@GridLayout>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'oa2.png'
+    BoxLayout:
+        cols: 2
+        rows: 4
+        orientation: 'vertical'
+        padding: "40dp"
+        MDLabel:
+            id: multiplication_equation
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            text: 'Multiplication'
+            front_size: '80dp'
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: "blue"
+            font_size: self.width/10
+        MDLabel:
+            id: slider_display
+            size: 1, 1
+            front_size: '120dp'
+            font_name: 'fontss/AlleyGarden-2Ogdw.ttf'
+            font_size: '80dp'
+            text: ""
+            halign: "center"
+        MDSlider:
+            id: juicer_slider
+            hint: True
+            hint_bg_color: "blue"
+            hint_text_color: "gray"
+            on_release: 
+            on_value: slider_display.text = str(int(self.value))
+        MDRectangleFlatButton:
+            id: try_button
+            text: "Try!"
+            background_color: 0.1, 0.20, 0.8, 1
+            line_color: "green"
+            pos_hint: {"center_x": 0.5}
+            on_press: 
+                app.mul2_check()
+            
+# <Add3Screen>:
+#     StackLayout:
+#         id: 20
+#         padding: "10dp", "10dp"
+#         spacing: "5dp"
+#         GridLayout:
+#             cols: 1
+#             BoxLayout:
+#                 orientation: "horizontal"
+#                 MDLabel:
+#                     text: "Number 1"
+#                     color: "black"
+#                 MDLabel:
+#                     text: " + "
+#                     color: "black"
+#                 MDLabel: 
+#                     text: "Number 2"
+#                     color: "black"
+#                 MDLabel:
+#                     text: " = "
+#                     color: "black"
+#                 MDLabel:
+#                     id: lamar
+            
+#             # this is where the kids are meant to drag the objects
+#             Button:
+#                 id: bruh
+#                 text: "Press This Button To Update Answer "
+#                 on_press:
+#                     app.giga_nice()
+
+#             BoxLayout:
+#                 DragBehavior:
+#                     id:1
+#                 DragBehavior:
+#                     id:2
+#                 DragBehavior:
+#                     id:3
+#                 DragBehavior:
+#                     id:4
+#                 DragBehavior:
+#                     id:5
+#                 DragBehavior:
+#                     id:6
+#                 DragBehavior:
+#                     id:7
+#                 DragBehavior:
+#                     id:8
+#                 DragBehavior:
+#                     id:9
+#                 DragBehavior:
+#                     id:10
+#     DragBehavior:
+#         text: "Pain"
+#         drag_rectangle: self.x, self.y, self.width, self.height
+#         drag_distance: 0
